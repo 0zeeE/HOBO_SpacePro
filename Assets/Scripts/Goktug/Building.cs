@@ -9,21 +9,25 @@ public class Building : MonoBehaviour
     [Header("Üretim Kýsmý")]
     [SerializeField] public myMaterialHolder[] consume;
     [SerializeField] public myMaterialHolder[] produce;
+    [SerializeField] private GameObject uretemiyorum;
 
     [Header("lvl")]
     [SerializeField] public int myLvl;
+    [SerializeField] public int gerekliExp;
+    [SerializeField] public int Exp;
     [SerializeField] public GameObject[] eachLvl;
+
 
 
     [Header("seçilen gosterme")]
     [SerializeField] private GameObject chosenSym;
-    [SerializeField] private bool amIChosen;
+    [SerializeField] public bool amIChosen;
     [SerializeField] public static bool AnyChosen;
 
 
     [Header("CD")]
     [SerializeField] private float produceTimeMax;
-    private float produceTime;
+    [SerializeField] private float produceTime;
 
     public void setMyLvl(int nowMyLvl)
     {
@@ -35,7 +39,37 @@ public class Building : MonoBehaviour
     }
     public void uretHerSeyi()
     {
+        Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
+        foreach (myMaterialHolder myMaterialHolderr in consume)
+        {
+            if (!Depomuz[0].depodaVarMi(myMaterialHolderr))
+            {
+                Exp--;
+                if (Exp <= 0)
+                {
+                    uretemiyorum.SetActive(true);
+                    Exp = 0;
+                }
+                return;
+            }
+        }
+        foreach (myMaterialHolder myMaterialHolderr in consume)
+        {
+            Depomuz[0].depodanCikar(myMaterialHolderr);
 
+        }
+
+        foreach (myMaterialHolder myMaterialHolderr in produce)
+        {
+            Depomuz[0].depoyaEkle(myMaterialHolderr,myLvl);
+        }
+        uretemiyorum.SetActive(false);
+        Exp++;
+        if (gerekliExp*(myLvl+1) <= Exp)
+        {
+            myLvl++;
+            Exp = 0;
+        }
     }
     void Start()
     {
