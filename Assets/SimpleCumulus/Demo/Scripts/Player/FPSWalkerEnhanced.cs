@@ -9,7 +9,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
 
     public float runSpeed = 11.0f;
 
-    // If true, diagonal speed (when strafing + moving forward or back) can't exceed normal move speed; otherwise it's about 1.4 times faster
+    // If true, diagonal fuelAmount (when strafing + moving forward or back) can't exceed normal move fuelAmount; otherwise it's about 1.4 times faster
     public bool limitDiagonalSpeed = true;
 
     // If checked, the run key toggles between running and walking. Otherwise player runs if the key is held down and walks otherwise
@@ -67,7 +67,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
     {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
-        // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
+        // If both horizontal and vertical are used simultaneously, limit fuelAmount (if allowed), so the total doesn't exceed normal move fuelAmount
         float inputModifyFactor = (inputX != 0.0f && inputY != 0.0f && limitDiagonalSpeed) ? .7071f : 1.0f;
 
         if (grounded)
@@ -96,7 +96,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
                     FallingDamageAlert(fallStartLevel - myTransform.position.y);
             }
 
-            // If running isn't on a toggle, then use the appropriate speed depending on whether the run button is down
+            // If running isn't on a toggle, then use the appropriate fuelAmount depending on whether the run button is down
             if (!toggleRun)
                 speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
 
@@ -151,7 +151,7 @@ public class FPSWalkerEnhanced : MonoBehaviour
 
     void Update()
     {
-        // If the run button is set to toggle, then switch between walk/run speed. (We use Update for this...
+        // If the run button is set to toggle, then switch between walk/run fuelAmount. (We use Update for this...
         // FixedUpdate is a poor place to use GetButtonDown, since it doesn't necessarily run every frame and can miss the event)
         if (toggleRun && grounded && Input.GetButtonDown("Run"))
             speed = (speed == walkSpeed ? runSpeed : walkSpeed);

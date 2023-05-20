@@ -9,14 +9,14 @@ public class RocketMovement : MonoBehaviour
     public int fuelLevel = 1;
     public float flySpeed = 400f;
     public float rotateSpeed = 4f;
-    public float fuelAmount = 50f;
+    [SerializeField ]private float fuelAmount = 50f;
     public float fuelDecreaseAmount = 2f;
     public float maxHeight;
     Vector2 move;
     Transform transform;
     public Rigidbody2D rigidbody;
 
-    void Start()
+    void Awake()
     {
         maxHeight = 0;
         rigidbody = GetComponent<Rigidbody2D>();
@@ -107,5 +107,10 @@ public class RocketMovement : MonoBehaviour
             maxHeight = transform.position.y;
         }
         Debug.Log("Max Height: " + maxHeight);
+    }
+
+    public float GetFuel()
+    {
+        return fuelAmount;
     }
 }
