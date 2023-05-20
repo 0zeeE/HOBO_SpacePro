@@ -7,14 +7,14 @@ public class RocketMovement : MonoBehaviour
     // Start is called before the first frame update
     public int rocketLevel = 1;
     public int fuelLevel = 1;
-    public float flySpeed = 400f;
-    public float rotateSpeed = 4f;
-    [SerializeField ]private float fuelAmount = 50f;
-    public float fuelDecreaseAmount = 2f;
+    [SerializeField]private float flySpeed = 400f;
+    [SerializeField]private float rotateSpeed = 4f;
+    [SerializeField] private float fuelAmount = 50f;
+    [SerializeField] private float fuelDecreaseAmount = 2f;
     public float maxHeight;
     Vector2 move;
-    Transform transform;
-    public Rigidbody2D rigidbody;
+    private Transform transform;
+    private Rigidbody2D rigidbody;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class RocketMovement : MonoBehaviour
     void Update()
     {
         move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Debug.Log(fuelAmount);
+        //Debug.Log("Yakit miktari: " + fuelAmount);
     }
 
     private void FixedUpdate()
@@ -57,7 +57,7 @@ public class RocketMovement : MonoBehaviour
         
     }
 
-    private void SetRocketLevel()
+    public void SetRocketLevel()
     {
         if (rocketLevel == 1)
         {
@@ -80,7 +80,7 @@ public class RocketMovement : MonoBehaviour
         }
     }
 
-    private void SetFuelLevel()
+    public void SetFuelLevel()
     {
         if(fuelLevel == 1)
         {
@@ -104,7 +104,7 @@ public class RocketMovement : MonoBehaviour
     {
         if(transform.position.y > maxHeight)
         {
-            maxHeight = transform.position.y;
+            maxHeight = transform.position.y * 5;
         }
         Debug.Log("Max Height: " + maxHeight);
     }

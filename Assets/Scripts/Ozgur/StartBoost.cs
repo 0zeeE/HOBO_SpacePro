@@ -45,7 +45,7 @@ public class StartBoost : MonoBehaviour
         render1.color = JumpColor;
     }
 
-    private void SetBoosterLevel()
+    public void SetBoosterLevel()
     {
         if (boosterLevel == 0)
         {

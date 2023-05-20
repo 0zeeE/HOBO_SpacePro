@@ -41,36 +41,28 @@ public class Speedometer : MonoBehaviour {
         CalculateObjectSpeed();
         HandleObjectSpeed();
       
-        //fuelAmount += objectSpeed * Time.deltaTime;
-        //if (fuelAmount > maxFuel) fuelAmount = maxFuel;
+        
 
         needleTranform.eulerAngles = new Vector3(0, 0, GetSpeedRotation());
     }
 
     private void HandleObjectSpeed() {
         
+
         if (objectSpeed > 0) {
             
             speed += objectSpeed * Time.deltaTime;
         } 
         else 
         {
+            
             if(objectSpeed == 0)
             {
                 speed = 0;
             }
 
-            speed -= objectSpeed * Time.deltaTime;
         }
 
-        if (Input.GetAxisRaw("Vertical") < 0) {
-            float brakeSpeed = 100f;
-            speed -= brakeSpeed * Time.deltaTime;
-        }
-
-        
-
-        
         
 
         speed = Mathf.Clamp(speed, 0f, speedMax);

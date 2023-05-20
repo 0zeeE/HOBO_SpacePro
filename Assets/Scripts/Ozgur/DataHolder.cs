@@ -6,12 +6,12 @@ public class DataHolder : MonoBehaviour
 {
     public static DataHolder Instance;
 
-    StartBoost BoosterStat;
-    RocketMovement RocketStat;
-    private int earnedMoney;
+    [SerializeField] private GameObject Booster;
+    [SerializeField] private GameObject Rocket;
     [SerializeField] private int rocketLevel = 1;
     [SerializeField] private int boosterLevel = 1;
     [SerializeField] private int fuelLevel = 1;
+    private int earnedMoney;
 
     private void Awake()
     {
@@ -19,8 +19,18 @@ public class DataHolder : MonoBehaviour
     }
     void Start()
     {
+        Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
+        Booster.GetComponent<StartBoost>().SetBoosterLevel();
+        Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
+        Rocket.GetComponent<RocketMovement>().SetRocketLevel();
+        Rocket.GetComponent<RocketMovement>().fuelLevel = fuelLevel;
+        Rocket.GetComponent<RocketMovement>().SetFuelLevel();
+
+       
+
+
         //Diger scene'e tasimak icin olusturulmus kod:
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(this.gameObject);
             return;
@@ -32,16 +42,14 @@ public class DataHolder : MonoBehaviour
 
         //Diger mapteki upgrade olayina gore upgrade'i tasiyan kod
 
-        BoosterStat.boosterLevel = boosterLevel;
-        RocketStat.rocketLevel = rocketLevel;
-        RocketStat.fuelLevel = fuelLevel;
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-                
+        IncreaseMoney();
     }
 
     public void IncreaseRocketLevel()
@@ -80,8 +88,13 @@ public class DataHolder : MonoBehaviour
         }
     }
 
-    void IncreaseMoney()
+    public void IncreaseMoney()
     {
-        earnedMoney = (int)RocketStat.maxHeight /100;
+        earnedMoney = (int)Rocket.GetComponent<RocketMovement>().maxHeight /10;
+    }
+
+    public int GetMoney()
+    {
+        return earnedMoney;
     }
 }
