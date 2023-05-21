@@ -97,4 +97,9 @@ public class GameMenuManager : MonoBehaviour
         attitudeText.text = attitude.ToString() +" metre";
         earnedMoneyText.text = money.ToString() + " TL";
     }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

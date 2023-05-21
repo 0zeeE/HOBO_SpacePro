@@ -56,6 +56,8 @@ public class DataHolder : MonoBehaviour
 
 
         IncreaseMoney();
+
+        
     }
 
     public void IncreaseRocketLevel()
@@ -96,7 +98,11 @@ public class DataHolder : MonoBehaviour
 
     public void IncreaseMoney()
     {
-        earnedMoney = (int)Rocket.GetComponent<RocketMovement>().maxHeight /10;
+        if(Rocket != null)
+        {
+            earnedMoney = (int)Rocket.GetComponent<RocketMovement>().maxHeight / 10;
+        }
+        
     }
 
     public int GetMoney()
