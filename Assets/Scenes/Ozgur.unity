@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 520683913}
   m_Layer: 0
   m_Name: StartBoost
-  m_TagString: Untagged
+  m_TagString: Booster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 1719015212}
   m_Layer: 0
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1149,6 +1149,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044313776589298558, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
       propertyPath: m_Name
+      value: DataHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044313776589298558, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
+      propertyPath: m_TagString
       value: DataHolder
       objectReference: {fileID: 0}
     m_RemovedComponents: []

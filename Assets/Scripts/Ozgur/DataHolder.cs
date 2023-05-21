@@ -19,6 +19,9 @@ public class DataHolder : MonoBehaviour
     }
     void Start()
     {
+        
+
+
         Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
         Booster.GetComponent<StartBoost>().SetBoosterLevel();
         Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
@@ -49,6 +52,9 @@ public class DataHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetRocketAndBoost();
+
+
         IncreaseMoney();
     }
 
@@ -96,5 +102,17 @@ public class DataHolder : MonoBehaviour
     public int GetMoney()
     {
         return earnedMoney;
+    }
+
+    public void SetRocketAndBoost()
+    {
+        if (Booster == null)
+        {
+            Booster = GameObject.FindGameObjectWithTag("Booster");
+        }
+        if (Rocket == null)
+        {
+            Rocket = GameObject.FindGameObjectWithTag("Rocket");
+        }
     }
 }

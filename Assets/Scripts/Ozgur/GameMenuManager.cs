@@ -20,14 +20,21 @@ public class GameMenuManager : MonoBehaviour
 
 
     // Start is called before the first frame update
+
+
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Dataholder == null)
+        {
+            Dataholder = GameObject.FindGameObjectWithTag("DataHolder");
+        }
+
+
         attitude = (int)Rocket.GetComponent<RocketMovement>().maxHeight;
         money = Dataholder.GetComponent<DataHolder>().GetMoney();
 
@@ -65,6 +72,7 @@ public class GameMenuManager : MonoBehaviour
     public void RestartSection()
     {
         Debug.Log("Restarting");
+        Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }
