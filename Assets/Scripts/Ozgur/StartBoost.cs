@@ -14,6 +14,9 @@ public class StartBoost : MonoBehaviour
     public Color JumpColor = Color.blue;
     private SpriteRenderer render1;
 
+    [SerializeField] private AudioSource boostSound;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class StartBoost : MonoBehaviour
     {
         if(Input.GetAxisRaw("Vertical") != 0 && isBoosted ==false)
         {
+            boostSound.Play();
             rb.AddForce(startMove);
             isBoosted = true;
             ColorChange();

@@ -16,6 +16,9 @@ public class RocketMovement : MonoBehaviour
     private Transform transform;
     private Rigidbody2D rigidbody;
 
+    [SerializeField] private GameObject soundControl;
+    
+
     void Awake()
     {
         maxHeight = 0;
@@ -36,12 +39,24 @@ public class RocketMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-
-        if(fuelAmount > 0)
+        if (Input.GetAxisRaw("Vertical") > 0 && fuelAmount > 0)
         {
-            if(move.y != 0)
+            soundControl.SetActive(true);
+        }
+        else
+        {
+            soundControl.SetActive(false);
+        }
+
+        if (fuelAmount > 0)
+        {
+            
+
+
+            if (move.y > 0)
             {
+                
+
                 rigidbody.AddForce(move * flySpeed * Time.deltaTime);
                 fuelAmount = fuelAmount - Time.deltaTime * fuelDecreaseAmount;
             }
