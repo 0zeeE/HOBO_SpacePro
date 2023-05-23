@@ -28,10 +28,7 @@ public class DataHolder : MonoBehaviour
     }
     void Start()
     {
-
-
-
-        adamOl();
+        
 
 
 

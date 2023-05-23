@@ -1475,7 +1475,7 @@ PrefabInstance:
     - target: {fileID: 4044313776589298544, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
       propertyPath: Rocket
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1719015207}
     - target: {fileID: 4044313776589298544, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
       propertyPath: Booster
       value: 
