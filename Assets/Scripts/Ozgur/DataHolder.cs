@@ -11,25 +11,29 @@ public class DataHolder : MonoBehaviour
     [SerializeField] private int rocketLevel = 1;
     [SerializeField] private int boosterLevel = 1;
     [SerializeField] private int fuelLevel = 1;
-    private int earnedMoney;
+    [SerializeField] private int earnedMoney;
 
     private void Awake()
     {
         
     }
-    void Start()
+    private void adamOl()
     {
-        
-
-
         Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
         Booster.GetComponent<StartBoost>().SetBoosterLevel();
         Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
         Rocket.GetComponent<RocketMovement>().SetRocketLevel();
         Rocket.GetComponent<RocketMovement>().fuelLevel = fuelLevel;
         Rocket.GetComponent<RocketMovement>().SetFuelLevel();
+    }
+    void Start()
+    {
 
-       
+
+
+        adamOl();
+
+
 
 
         //Diger scene'e tasimak icin olusturulmus kod:
@@ -115,10 +119,12 @@ public class DataHolder : MonoBehaviour
         if (Booster == null)
         {
             Booster = GameObject.FindGameObjectWithTag("Booster");
+            adamOl();
         }
         if (Rocket == null)
         {
             Rocket = GameObject.FindGameObjectWithTag("Rocket");
+            adamOl();
         }
     }
 }

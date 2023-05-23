@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3f90388eec4e547a856430d79f92e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketLevel: 1
+  rocketLevel: 2
   fuelLevel: 1
   flySpeed: 900
   rotateSpeed: 4
@@ -1475,7 +1475,7 @@ PrefabInstance:
     - target: {fileID: 4044313776589298544, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
       propertyPath: Rocket
       value: 
-      objectReference: {fileID: 1719015207}
+      objectReference: {fileID: 0}
     - target: {fileID: 4044313776589298544, guid: 51e2b96bcbe946549b8cb7157a505a04, type: 3}
       propertyPath: Booster
       value: 

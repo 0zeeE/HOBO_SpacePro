@@ -33,6 +33,7 @@ public class RocketMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //Debug.Log("Yakit miktari: " + fuelAmount);
     }
@@ -57,12 +58,12 @@ public class RocketMovement : MonoBehaviour
             {
                 
 
-                rigidbody.AddForce(move * flySpeed * Time.deltaTime);
+                rigidbody.AddForce(this.gameObject.transform.up * flySpeed * Time.deltaTime);
                 fuelAmount = fuelAmount - Time.deltaTime * fuelDecreaseAmount;
             }
             if(move.x != 0)
             {
-                rigidbody.AddForce(move * rotateSpeed * Time.deltaTime);
+                //rigidbody.AddForce(new Vector2(move.x,0) * rotateSpeed * Time.deltaTime);
                 fuelAmount = fuelAmount - Time.deltaTime * fuelDecreaseAmount;
                 transform.Rotate(0, 0, -move.x);
             } 
