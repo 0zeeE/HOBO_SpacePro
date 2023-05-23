@@ -13,9 +13,11 @@ public class Building : MonoBehaviour
 
     [Header("lvl")]
     [SerializeField] public int myLvl;
-    [SerializeField] public int gerekliExp;
+    [SerializeField] public bool myLvlIsFull;
+    [SerializeField] public int gerekliExp, gerekliExpNow;
     [SerializeField] public int Exp;
     [SerializeField] public GameObject[] eachLvl;
+    [SerializeField] public myMaterialHolder[] lvlUpRequ;
 
 
 
@@ -26,7 +28,7 @@ public class Building : MonoBehaviour
 
 
     [Header("CD")]
-    [SerializeField] private float produceTimeMax;
+    [SerializeField] public float produceTimeMax;
     [SerializeField] private float produceTime;
 
     public void setMyLvl(int nowMyLvl)
@@ -65,14 +67,49 @@ public class Building : MonoBehaviour
         }
         uretemiyorum.SetActive(false);
         Exp++;
-        if (gerekliExp*(myLvl+1) <= Exp)
+        if (gerekliExpNow <= Exp)
         {
+            myLvlIsFull = true;
+            Exp = gerekliExpNow;
+        }
+        else
+        {
+            myLvlIsFull = false;
+        }
+    }
+    public void lvlUp()
+    {
+        if (myLvlIsFull)
+        {
+            Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
+            foreach (myMaterialHolder myMaterialHolderr in lvlUpRequ)
+            {
+                if (!Depomuz[0].depodaVarMi(myMaterialHolderr))
+                {
+                    Debug.Log("cant lvl up");
+                    return;
+                }
+            }
+            foreach (myMaterialHolder myMaterialHolderr in lvlUpRequ)
+            {
+                myMaterialHolder myMaterialHolderWithLvl = new myMaterialHolder(myMaterialHolderr.myMateriall, (myMaterialHolderr.amountt * myLvl));
+                Depomuz[0].depodanCikar(myMaterialHolderr);
+
+            }
+
+            myLvlIsFull = false;
             myLvl++;
             Exp = 0;
+            gerekliExpNow = gerekliExp * (myLvl + 1);
+
+            setMyLvl(myLvl);//fotonun düzelmesi için
+
         }
+
     }
     void Start()
     {
+        gerekliExpNow = gerekliExp * (myLvl + 1);
         setClickBisi();
         setMyLvl(myLvl);
     }
@@ -87,7 +124,7 @@ public class Building : MonoBehaviour
 
 
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.gameObject != gameObject)

@@ -8,6 +8,12 @@ public class UI_Aciklama : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI aciklamam;
     [SerializeField] private GameObject panelll;
+    [SerializeField] private benNeyim benBuyum;
+    [SerializeField] private Building bunuTutuyorum;
+    public enum benNeyim{
+        uretimAciklamasi,
+        lvlGereksinimi
+    };
     void Start()
     {
         
@@ -31,12 +37,20 @@ public class UI_Aciklama : MonoBehaviour
         {
             if (a.amIChosen == true)
             {
-                bunaTutun(a);
+                if(benBuyum == benNeyim.uretimAciklamasi)
+                {
+                    bunaTutunUretimAciklama(a);
+                }
+                if (benBuyum == benNeyim.lvlGereksinimi)
+                {
+                    bunaTutunLvl(a);
+                }
+                bunuTutuyorum = a;
                 return;
             }
         }
     }
-    private void bunaTutun(Building tutunulacakObj)
+    private void bunaTutunUretimAciklama(Building tutunulacakObj)
     {
         string aciklama="";
         foreach (myMaterialHolder kullan in tutunulacakObj.consume)
@@ -47,10 +61,32 @@ public class UI_Aciklama : MonoBehaviour
 
         foreach (myMaterialHolder produce in tutunulacakObj.produce)
         {
-            aciklama += produce.amountt +"x"+ produce.myMateriall.name + " ";
+            aciklama += produce.amountt * tutunulacakObj.myLvl + "x"+ produce.myMateriall.name + " ";
         }
+        aciklama += " /"+tutunulacakObj.produceTimeMax + "sn";
         aciklamam.text = aciklama;
 
-        Debug.Log(aciklama);
+        //Debug.Log(aciklama);
+    }
+    private void bunaTutunLvl(Building tutunulacakObj)
+    {
+        string aciklama = "";
+
+        aciklama += tutunulacakObj.Exp + "/" + tutunulacakObj.gerekliExpNow + " exp\n";
+
+        foreach (myMaterialHolder kullan in tutunulacakObj.lvlUpRequ)
+        {
+            aciklama += kullan.amountt* tutunulacakObj.myLvl + "x" + kullan.myMateriall.name + " ";
+        }
+        aciklama += " -> seviye++";
+
+
+        aciklamam.text = aciklama;
+
+        //Debug.Log(aciklama);
+    }
+    public void lvlUptutunulacakObj()
+    {
+        bunuTutuyorum.lvlUp();
     }
 }
