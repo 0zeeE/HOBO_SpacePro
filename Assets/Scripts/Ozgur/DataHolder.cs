@@ -15,23 +15,34 @@ public class DataHolder : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(adamOl());
+        SetRocketAndBoost();
         
     }
-    private void adamOl()
+    IEnumerator adamOl()
     {
+        
+        while (GameMenuManager.isFullyLoaded==false)//yükleme bekliyo
+        {
+            
+            yield return null;
+           
+        }
         Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
         Booster.GetComponent<StartBoost>().SetBoosterLevel();
         Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
         Rocket.GetComponent<RocketMovement>().SetRocketLevel();
         Rocket.GetComponent<RocketMovement>().fuelLevel = fuelLevel;
         Rocket.GetComponent<RocketMovement>().SetFuelLevel();
+
+
     }
     void Start()
     {
 
 
-
-        adamOl();
+        //SetRocketAndBoost();
+        //adamOl();
 
 
 

@@ -73,8 +73,18 @@ public class GameMenuManager : MonoBehaviour
     {
         Debug.Log("Restarting");
         Resume();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+        StartCoroutine(loadThis(SceneManager.GetActiveScene().name));
+    }
+
+    static public bool isFullyLoaded;
+    IEnumerator loadThis(string sceneName)
+    {
+        isFullyLoaded = false;
+        SceneManager.LoadScene(sceneName);
+        isFullyLoaded = true;
+
+        yield return null;
+
     }
 
     public void ExitGame()
