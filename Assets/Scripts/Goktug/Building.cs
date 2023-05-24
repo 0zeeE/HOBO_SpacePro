@@ -117,35 +117,61 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            setMyLvl(myLvl);
-        }
+
 
 
 
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider != null && hit.collider.gameObject != gameObject)
-            {
-                //Debug.Log(hit.collider.gameObject.name + " was clicked instead of " + gameObject.name);
-                amIChosen = false;
-
-                chosenSym.SetActive(amIChosen);
-            }
-            else if (hit.collider != null && hit.collider.gameObject == gameObject)
+            if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
                 Debug.Log("Clicked on " + gameObject.name);
                 amIChosen = true;
                 AnyChosen = true;
                 chosenSym.SetActive(amIChosen);
-            }else if (hit.collider == null)
+            }
+            else if (hit.collider != null)
+            {
+                try
+                {
+
+                    Building myBuilding = hit.collider.gameObject.GetComponent<Building>();
+                    if (myBuilding != null)
+                    {
+                        amIChosen = false;
+                        AnyChosen = true;
+                        chosenSym.SetActive(amIChosen);
+                    }
+                    else
+                    {
+                        amIChosen = false;
+                        AnyChosen = false;
+                        chosenSym.SetActive(amIChosen);
+                    }
+                }
+                finally
+                {
+
+                }
+
+
+            }
+            /*
+            else if (hit.collider != null && hit.collider.gameObject != gameObject)
+            {
+                //Debug.Log(hit.collider.gameObject.name + " was clicked instead of " + gameObject.name);
+                amIChosen = false;
+
+                chosenSym.SetActive(amIChosen);
+            }*/
+           else if (hit.collider == null)
             {
                 amIChosen = false;
                 AnyChosen = false;
                 chosenSym.SetActive(amIChosen);
             }
+            
         }
 
         produceTime -= Time.deltaTime;
