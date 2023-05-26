@@ -12,7 +12,7 @@ public class DilSaveLoaddo : MonoBehaviour
         string dataPath = Application.dataPath;
 
         // Combine the data path with the desired file name
-        string filePath = Path.Combine(dataPath, "example.txt");
+        string filePath = Path.Combine(dataPath, "Buildings.xml");
 
         // Check if the file already exists
         if (File.Exists(filePath))

@@ -24,6 +24,7 @@ public class GameMenuManager : MonoBehaviour
 
     void Start()
     {
+        isFullyLoaded = true;
     }
 
     // Update is called once per frame

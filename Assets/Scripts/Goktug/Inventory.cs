@@ -8,15 +8,29 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] public myMaterialHolder[] sahiplerim;
     [SerializeField] private TextMeshProUGUI depodakilerim;
+
+    public static Inventory Instance;
     void Start()
     {
+        //Diger scene'e tasimak icin olusturulmus kod:
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
+        Instance = this;
+
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (depodakilerim == null)
+        {
+            depodakilerim = GameObject.Find("depo_icindekiler").GetComponent<TextMeshProUGUI>();
+        }
     }
     public bool depodaVarMi(myMaterialHolder myMaterialHolderrr)
     {

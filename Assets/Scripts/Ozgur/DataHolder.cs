@@ -19,6 +19,7 @@ public class DataHolder : MonoBehaviour
         SetRocketAndBoost();
         
     }
+    
     IEnumerator adamOl()
     {
         
@@ -28,8 +29,13 @@ public class DataHolder : MonoBehaviour
             yield return null;
            
         }
+
+        Booster.GetComponent<StartBoost>().SetBoosterLvl(boosterLevel);
         Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
         Booster.GetComponent<StartBoost>().SetBoosterLevel();
+
+
+        Rocket.GetComponent<RocketMovement>().setMyLvls(rocketLevel, fuelLevel);
         Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
         Rocket.GetComponent<RocketMovement>().SetRocketLevel();
         Rocket.GetComponent<RocketMovement>().fuelLevel = fuelLevel;
@@ -102,6 +108,8 @@ public class DataHolder : MonoBehaviour
             rocketLevel = ShipParts4DataHolder.rocketLevel;
             boosterLevel = ShipParts4DataHolder.boosterLevel;
             fuelLevel = ShipParts4DataHolder.fuelLevel;
+
+            adamOl();
         }
         catch
         {
