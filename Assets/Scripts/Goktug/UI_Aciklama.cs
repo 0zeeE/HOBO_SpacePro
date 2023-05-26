@@ -10,6 +10,7 @@ public class UI_Aciklama : MonoBehaviour
     [SerializeField] private GameObject panelll;
     [SerializeField] private benNeyim benBuyum;
     [SerializeField] private Building bunuTutuyorum;
+    [SerializeField] private ShipParts bunuTutuyorumShipParts;
     public enum benNeyim{
         uretimAciklamasi,
         lvlGereksinimi
@@ -26,29 +27,56 @@ public class UI_Aciklama : MonoBehaviour
     }
     private void tutun()
     {
-        Building[] Depomuz = GameObject.FindObjectsOfType<Building>();
-        if (Building.AnyChosen == false)
+
+        if (Building.AnyChosen == false && ShipParts.AnyChosen == false)
         {
             panelll.SetActive(false);
             return;
         }
         panelll.SetActive(true);
-        foreach (Building a in Depomuz)
+        if (Building.AnyChosen == true)
         {
-            if (a.amIChosen == true)
+            Building[] binamiz = GameObject.FindObjectsOfType<Building>();
+            foreach (Building a in binamiz)
             {
-                if(benBuyum == benNeyim.uretimAciklamasi)
+                if (a.amIChosen == true)
                 {
-                    bunaTutunUretimAciklama(a);
+                    if (benBuyum == benNeyim.uretimAciklamasi)
+                    {
+                        bunaTutunUretimAciklama(a);
+                    }
+                    if (benBuyum == benNeyim.lvlGereksinimi)
+                    {
+                        bunaTutunLvl(a);
+                    }
+                    bunuTutuyorum = a;
+                    return;
                 }
-                if (benBuyum == benNeyim.lvlGereksinimi)
-                {
-                    bunaTutunLvl(a);
-                }
-                bunuTutuyorum = a;
-                return;
             }
         }
+
+
+        if (ShipParts.AnyChosen == true)
+        {
+            ShipParts[] shipimiz = GameObject.FindObjectsOfType<ShipParts>();
+            foreach (ShipParts a in shipimiz)
+            {
+                if (a.amIChosen == true)
+                {
+                    if (benBuyum == benNeyim.uretimAciklamasi)
+                    {
+                        bunaTutunUretimAciklama(a);
+                    }
+                    if (benBuyum == benNeyim.lvlGereksinimi)
+                    {
+                        bunaTutunLvl(a);
+                    }
+                    bunuTutuyorumShipParts = a;
+                    return;
+                }
+            }
+        }
+
     }
     private void bunaTutunUretimAciklama(Building tutunulacakObj)
     {
@@ -68,6 +96,7 @@ public class UI_Aciklama : MonoBehaviour
 
         //Debug.Log(aciklama);
     }
+
     private void bunaTutunLvl(Building tutunulacakObj)
     {
         string aciklama = "";
@@ -85,8 +114,67 @@ public class UI_Aciklama : MonoBehaviour
 
         //Debug.Log(aciklama);
     }
+
+
+
+    private void bunaTutunUretimAciklama(ShipParts tutunulacakObj)
+    {
+        string aciklama = "";
+        /*
+        foreach (myMaterialHolder kullan in tutunulacakObj.consume)
+        {
+            aciklama += kullan.amountt + "x" + kullan.myMateriall.name + " ";
+        }
+        aciklama += " -> ";
+
+        foreach (myMaterialHolder produce in tutunulacakObj.produce)
+        {
+            aciklama += produce.amountt * tutunulacakObj.myLvl + "x" + produce.myMateriall.name + " ";
+        }
+        aciklama += " /" + tutunulacakObj.produceTimeMax + "sn";
+        */
+        aciklama += tutunulacakObj.myAd + "\nlvl: " + tutunulacakObj.myLvl + "\n"+ tutunulacakObj.myDes;
+        aciklamam.text = aciklama;
+
+        //Debug.Log(aciklama);
+    }
+    private void bunaTutunLvl(ShipParts tutunulacakObj)
+    {
+        string aciklama = "";
+        
+       
+
+        foreach (myMaterialHolder kullan in tutunulacakObj.lvlUpRequ)
+        {
+            if (tutunulacakObj.myLvl == 0)
+            {
+                aciklama += kullan.amountt + "x" + kullan.myMateriall.name + " ";
+            }
+            else
+            {
+                aciklama += kullan.amountt * tutunulacakObj.myLvl + "x" + kullan.myMateriall.name + " ";
+            }
+            
+        }
+        
+        aciklama += " -> seviye++";
+
+
+        aciklamam.text = aciklama;
+    }
+
     public void lvlUptutunulacakObj()
     {
-        bunuTutuyorum.lvlUp();
+        if (Building.AnyChosen == true)
+        {
+            bunuTutuyorum.lvlUp();
+            return;
+        }
+        if (ShipParts.AnyChosen == true)
+        {
+            bunuTutuyorumShipParts.lvlUp();
+            return;
+        }
+        
     }
 }

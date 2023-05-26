@@ -89,6 +89,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void ExitGame()
     {
+        Resume();
         Debug.Log("Exiting the game");
         Application.Quit();
     }
@@ -96,6 +97,10 @@ public class GameMenuManager : MonoBehaviour
     public void ReturnMap()
     {
         Debug.Log("Returning Map");
+        Resume();
+        StartCoroutine(loadThis("SampleScene"));
+        DataHolder[] dataHolder = GameObject.FindObjectsOfType<DataHolder>();
+        dataHolder[0].burasi();
     }
 
 

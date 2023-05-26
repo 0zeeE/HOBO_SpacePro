@@ -126,7 +126,7 @@ public class Building : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
-                Debug.Log("Clicked on " + gameObject.name);
+                //Debug.Log("Clicked on " + gameObject.name);
                 amIChosen = true;
                 AnyChosen = true;
                 chosenSym.SetActive(amIChosen);

@@ -11,6 +11,10 @@ public class mySceneManager : MonoBehaviour
     {
         
     }
+    public void toLaunch()
+    {
+        StartCoroutine(loadThis("Ozgur"));
+    }
     static public bool isFullyLoaded;
     IEnumerator loadThis(string sceneName)
     {

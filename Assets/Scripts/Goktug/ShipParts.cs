@@ -6,19 +6,31 @@ using UnityEngine;
 public class ShipParts : MonoBehaviour
 {
     // Start is called before the first frame update
-    [Header("rokete gidecekler")]
-    [SerializeField] private int rocketLevel;
-    [SerializeField] private int boosterLevel;
-    [SerializeField] private int fuelLevel;
-
+    [Header("Partýn tanýmý")]
+    [SerializeField] public string myAd;
+    [SerializeField] public string myDes;
+    [SerializeField] private benNeyim benBuyum;//CLASS ile yapmam daha doðru ama caným böyle istedi basit kod diye
+    //Doðrusunda ben neyimi ve seviyeyi barýndýran class lazým
+    public enum benNeyim
+    {
+        rocketLevel,
+        boosterLevel,
+        fuelLevel
+    };
     [Header("seçilen gosterme")]
     [SerializeField] private GameObject chosenSym;
     [SerializeField] public bool amIChosen;
     [SerializeField] public static bool AnyChosen;
 
+    [Header("lvl up")]
+    [SerializeField] public int myLvl;
+    [SerializeField] private int myLvlmax;
+    [SerializeField] public GameObject[] eachLvl;
+    [SerializeField] public myMaterialHolder[] lvlUpRequ;
     void Start()
     {
         setClickBisi();
+        setMyLvl(myLvl);
     }
 
     // Update is called once per frame
@@ -30,7 +42,7 @@ public class ShipParts : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
-                Debug.Log("Clicked on " + gameObject.name);
+                //Debug.Log("Clicked on " + gameObject.name);
                 amIChosen = true;
                 AnyChosen = true;
                 chosenSym.SetActive(amIChosen);
@@ -73,6 +85,69 @@ public class ShipParts : MonoBehaviour
 
 
     }
+
+
+    public void lvlUp()
+    {
+        if (myLvlmax > myLvl)
+        {
+            Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
+            foreach (myMaterialHolder myMaterialHolderr in lvlUpRequ)
+            {
+                if (!Depomuz[0].depodaVarMi(myMaterialHolderr))
+                {
+                    Debug.Log("cant lvl up");
+                    return;
+                }
+            }
+            foreach (myMaterialHolder myMaterialHolderr in lvlUpRequ)
+            {
+                if (myLvl == 0)
+                {
+                    myMaterialHolder myMaterialHolderWithLvl = new myMaterialHolder(myMaterialHolderr.myMateriall, (myMaterialHolderr.amountt * 1));
+                }
+                else
+                {
+                    myMaterialHolder myMaterialHolderWithLvl = new myMaterialHolder(myMaterialHolderr.myMateriall, (myMaterialHolderr.amountt * myLvl));
+                }
+
+                Depomuz[0].depodanCikar(myMaterialHolderr);
+
+            }
+
+            myLvl++;
+            setMyLvl(myLvl);//fotonun düzelmesi için
+
+        }
+        else
+        {
+            Debug.Log("max lvl");
+        }
+        
+
+
+    }
+    public void setMyLvl(int nowMyLvl)
+    {
+        foreach (GameObject a in eachLvl)
+        {
+            a.SetActive(false);
+        }
+        eachLvl[nowMyLvl].SetActive(true);
+        if(benBuyum== ShipParts.benNeyim.boosterLevel)
+        {
+            ShipParts4DataHolder.boosterLevel = myLvl;
+        }
+        else if (benBuyum == ShipParts.benNeyim.rocketLevel)
+        {
+            ShipParts4DataHolder.rocketLevel = myLvl;
+        }
+        else if (benBuyum == ShipParts.benNeyim.fuelLevel)
+        {
+            ShipParts4DataHolder.fuelLevel = myLvl;
+        }
+    }
+
     void setClickBisi()
     {
 

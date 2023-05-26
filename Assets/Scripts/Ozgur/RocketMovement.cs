@@ -122,7 +122,7 @@ public class RocketMovement : MonoBehaviour
         {
             maxHeight = transform.position.y * 5;
         }
-        Debug.Log("Max Height: " + maxHeight);
+        //Debug.Log("Max Height: " + maxHeight);
     }
 
     public float GetFuel()

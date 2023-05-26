@@ -12,7 +12,7 @@ public class DataHolder : MonoBehaviour
     [SerializeField] private int boosterLevel = 1;
     [SerializeField] private int fuelLevel = 1;
     [SerializeField] private int earnedMoney;
-
+    [SerializeField] private myMaterialHolder para;
     private void Awake()
     {
         StartCoroutine(adamOl());
@@ -36,6 +36,26 @@ public class DataHolder : MonoBehaviour
         Rocket.GetComponent<RocketMovement>().SetFuelLevel();
 
 
+    }
+    public void burasi()
+    {
+        StartCoroutine(topladiðimiAktar());
+    }
+    IEnumerator topladiðimiAktar()
+    {
+        Debug.Log("topladiðimiAktar()");
+
+        
+
+        Debug.Log("bura");
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(1);
+        Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
+        Debug.Log("buraa");
+
+        Depomuz[0].depoyaEkle(para, earnedMoney);
+        
+        Destroy(this.gameObject);
     }
     void Start()
     {
@@ -72,9 +92,22 @@ public class DataHolder : MonoBehaviour
 
         IncreaseMoney();
 
-        
+        statGuncelle();
     }
+    public void statGuncelle()
+    {
+        try
+        {
 
+            rocketLevel = ShipParts4DataHolder.rocketLevel;
+            boosterLevel = ShipParts4DataHolder.boosterLevel;
+            fuelLevel = ShipParts4DataHolder.fuelLevel;
+        }
+        catch
+        {
+            return;
+        }
+    }
     public void IncreaseRocketLevel()
     {
         if(rocketLevel < 3)
