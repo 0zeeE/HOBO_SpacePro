@@ -8,15 +8,29 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] public myMaterialHolder[] sahiplerim;
     [SerializeField] private TextMeshProUGUI depodakilerim;
+
+    public static Inventory Instance;
     void Start()
     {
+        //Diger scene'e tasimak icin olusturulmus kod:
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
 
+        Instance = this;
+
+        GameObject.DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (depodakilerim == null)
+        {
+            depodakilerim = GameObject.Find("depo_icindekiler").GetComponent<TextMeshProUGUI>();
+        }
     }
     public bool depodaVarMi(myMaterialHolder myMaterialHolderrr)
     {
@@ -56,7 +70,7 @@ public class Inventory : MonoBehaviour
     }
     public void depoyaEkle(myMaterialHolder myMaterialHolderrr, int multiplier)
     {
-        Debug.Log("depoya ekle  " + myMaterialHolderrr.myMateriall);
+        //Debug.Log("depoya ekle  " + myMaterialHolderrr.myMateriall);
 
         //depoda önceden varsa
         foreach (myMaterialHolder sahip in sahiplerim)
@@ -72,7 +86,7 @@ public class Inventory : MonoBehaviour
             }
 
         }
-        Debug.Log("depoda yeni malzeme ekleniyo");
+        //Debug.Log("depoda yeni malzeme ekleniyo");
         //depoda önceden yokmuþ demek ki
         for (int i = 0; i < sahiplerim.Length; i++)
         {

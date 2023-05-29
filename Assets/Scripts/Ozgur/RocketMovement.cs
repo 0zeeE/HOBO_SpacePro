@@ -73,9 +73,19 @@ public class RocketMovement : MonoBehaviour
         
     }
 
+    public void setMyLvls(int rocketLvl, int fuelLvl)
+    {
+        rocketLevel = rocketLvl;
+        fuelLevel = fuelLvl;
+    }
     public void SetRocketLevel()
     {
-        if (rocketLevel == 1)
+        if (rocketLevel == 0)
+        {
+            flySpeed = 0;
+            rotateSpeed = 0;
+        }
+        else if(rocketLevel == 1)
         {
             flySpeed = 600f;
             rotateSpeed = 4f;
@@ -98,7 +108,11 @@ public class RocketMovement : MonoBehaviour
 
     public void SetFuelLevel()
     {
-        if(fuelLevel == 1)
+        if (fuelLevel == 0)
+        {
+            fuelAmount = 0;
+        }
+        else if (fuelLevel == 1)
         {
             fuelAmount = 30f;
         }
@@ -122,7 +136,7 @@ public class RocketMovement : MonoBehaviour
         {
             maxHeight = transform.position.y * 5;
         }
-        Debug.Log("Max Height: " + maxHeight);
+        //Debug.Log("Max Height: " + maxHeight);
     }
 
     public float GetFuel()
