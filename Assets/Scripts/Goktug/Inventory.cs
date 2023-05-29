@@ -27,10 +27,18 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (depodakilerim == null)
+        try
         {
-            depodakilerim = GameObject.Find("depo_icindekiler").GetComponent<TextMeshProUGUI>();
+            if (depodakilerim == null)
+            {
+                depodakilerim = GameObject.Find("depo_icindekiler").GetComponent<TextMeshProUGUI>();
+            }
         }
+        catch
+        {
+            
+        }
+       
     }
     public bool depodaVarMi(myMaterialHolder myMaterialHolderrr)
     {
