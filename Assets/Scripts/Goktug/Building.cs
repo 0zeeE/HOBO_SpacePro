@@ -39,6 +39,22 @@ public class Building : MonoBehaviour
         }
         eachLvl[nowMyLvl].SetActive(true);
     }
+    public void loadMe(int lvl,int exp)
+    {
+        myLvl = lvl;
+        Exp = exp;
+        gerekliExpNow = gerekliExp * (myLvl + 1);
+        if (gerekliExpNow <= Exp)
+        {
+            myLvlIsFull = true;
+            Exp = gerekliExpNow;
+
+        }
+        else
+        {
+            myLvlIsFull = false;
+        }
+    }
     public void uretHerSeyi()
     {
         Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
