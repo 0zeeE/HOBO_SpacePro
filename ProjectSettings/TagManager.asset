@@ -7,6 +7,9 @@ TagManager:
   - Rocket
   - Booster
   - DataHolder
+  - Rocketlvl1
+  - Rocketlvl2
+  - Rocketlvl3
   layers:
   - Default
   - TransparentFX

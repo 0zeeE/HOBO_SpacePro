@@ -16,6 +16,8 @@ public class StartBoost : MonoBehaviour
 
     [SerializeField] private AudioSource boostSound;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +28,11 @@ public class StartBoost : MonoBehaviour
         startMove = new Vector2(0, boostSpeed);
         render1 = GetComponent<SpriteRenderer>();
 
-       
-  
+        
+
+
+
+
 
     }
 
@@ -61,14 +66,17 @@ public class StartBoost : MonoBehaviour
         else if (boosterLevel == 1)
         {
             boostSpeed = 400f;
+            
         }
         else if (boosterLevel == 2)
         {
             boostSpeed = 800f;
+            
         }
         else if (boosterLevel == 3)
         {
             boostSpeed = 1200f;
+            
         }
         else
         {
