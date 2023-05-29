@@ -17,7 +17,7 @@ public class DilSaveLoaddo : MonoBehaviour
     {
         // Get the path to the game's data folder
         string dataPath = Application.dataPath;
-        string filePath = Path.Combine(dataPath, "Buildings.xml");
+        string filePath = Path.Combine(dataPath, "save01.xml");
         filePathh = filePath;
 
 
@@ -136,7 +136,7 @@ public class DilSaveLoaddo : MonoBehaviour
                 }
             }
         }
-
+        /*
         foreach (XmlNode buildingNode in buildingNodes)
         {
             Student student = new Student();
@@ -151,6 +151,7 @@ public class DilSaveLoaddo : MonoBehaviour
             Console.WriteLine("Number: " + student.Number);
             Console.WriteLine();
         }
+        */
     }
     void Update()
     {
