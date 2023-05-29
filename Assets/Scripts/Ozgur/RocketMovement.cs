@@ -132,7 +132,7 @@ public class RocketMovement : MonoBehaviour
 
     private void CalculateMaxHeight()
     {
-        if(transform.position.y > maxHeight)
+        if(transform.position.y * 5 > maxHeight)
         {
             maxHeight = transform.position.y * 5;
         }

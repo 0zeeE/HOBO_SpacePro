@@ -96,9 +96,14 @@ public class DataHolder : MonoBehaviour
         SetRocketAndBoost();
 
 
-        IncreaseMoney();
+        
 
         statGuncelle();
+    }
+
+    private void FixedUpdate()
+    {
+        IncreaseMoney();
     }
     public void statGuncelle()
     {
