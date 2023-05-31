@@ -18,6 +18,9 @@ public class mySceneManager : MonoBehaviour
     static public bool isFullyLoaded;
     IEnumerator loadThis(string sceneName)
     {
+        DilSaveLoaddo[] saveScr = GameObject.FindObjectsOfType<DilSaveLoaddo>();
+        saveScr[0].saveGame();
+
         isFullyLoaded = false;
         SceneManager.LoadScene(sceneName);
         isFullyLoaded = true;

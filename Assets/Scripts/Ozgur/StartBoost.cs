@@ -8,9 +8,8 @@ public class StartBoost : MonoBehaviour
     [SerializeField] private bool isBoosted = false;
     public int boosterLevel = 0; // 0(yok) 1(basit) 2(orta) 3(guclu) 4(debug)
     private Rigidbody2D rb;
-    private Transform transform;
     private Vector2 startMove;
-    public float boostSpeed = 1200f; //levele göre baslangic ivmelenme hizini ayarliyor.
+    public float boostSpeed = 0; //levele göre baslangic ivmelenme hizini ayarliyor.
     public Color JumpColor = Color.blue;
     private SpriteRenderer render1;
 
@@ -22,9 +21,9 @@ public class StartBoost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetBoosterLevel();
+        //SetBoosterLevel();
         rb = rocket.GetComponent<Rigidbody2D>();
-        transform = rocket.GetComponent<Transform>();
+
         startMove = new Vector2(0, boostSpeed);
         render1 = GetComponent<SpriteRenderer>();
 
@@ -39,12 +38,12 @@ public class StartBoost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxisRaw("Vertical") != 0 && isBoosted ==false)
+        if(Input.GetAxisRaw("Vertical") != 0 && isBoosted ==false && boosterLevel!=0)
         {
             boostSound.Play();
             rb.AddForce(startMove);
             isBoosted = true;
-            ColorChange();
+            //ColorChange();
 
         }
     }
@@ -56,12 +55,14 @@ public class StartBoost : MonoBehaviour
     public void SetBoosterLvl(int boosterLvl)
     {
         boosterLevel = boosterLvl;
+        SetBoosterLevel();
     }
     public void SetBoosterLevel()
     {
         if (boosterLevel == 0)
         {
             boostSpeed = 0f;
+            
         }
         else if (boosterLevel == 1)
         {
@@ -75,12 +76,13 @@ public class StartBoost : MonoBehaviour
         }
         else if (boosterLevel == 3)
         {
-            boostSpeed = 1200f;
+            boostSpeed = 1800f;
             
         }
         else
         {
             Debug.Log("Boost Speed ayarlanmadi");
         }
+        Debug.Log("boostSpeed: " + boostSpeed);
     }
 }

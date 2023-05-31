@@ -223,7 +223,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732226814702658271}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.25, y: 2.61, z: 0.3603227}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -246,15 +246,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consume:
-  - myMateriall: {fileID: 11400000, guid: bc5950a0c1a39764a9e4c7f833675008, type: 2}
+  - myMateriall: {fileID: 11400000, guid: 61b5466a4b4919c41b30adeda81f9c19, type: 2}
     amountt: 2
   produce:
-  - myMateriall: {fileID: 11400000, guid: 432c9b1b2333de14198c0638fe5408b8, type: 2}
-    amountt: 10
+  - myMateriall: {fileID: 11400000, guid: b6076134eeefe2f4c9fe13b9b065907d, type: 2}
+    amountt: 3
+  - myMateriall: {fileID: 11400000, guid: fa81e346add5e6540a7ba2d981ae4eef, type: 2}
+    amountt: 4
   uretemiyorum: {fileID: 5059513162297069810}
   myLvl: 1
   myLvlIsFull: 0
-  gerekliExp: 100
+  gerekliExp: 20
   gerekliExpNow: 0
   Exp: 0
   eachLvl:
@@ -263,8 +265,10 @@ MonoBehaviour:
   - {fileID: 2707434027210189662}
   - {fileID: 475652879303784415}
   lvlUpRequ:
-  - myMateriall: {fileID: 11400000, guid: 432c9b1b2333de14198c0638fe5408b8, type: 2}
-    amountt: 1000
+  - myMateriall: {fileID: 11400000, guid: 9857c43d63bb17446959e32f761f951e, type: 2}
+    amountt: 200
+  - myMateriall: {fileID: 11400000, guid: 61b5466a4b4919c41b30adeda81f9c19, type: 2}
+    amountt: 20
   chosenSym: {fileID: 1732226814635755505}
   amIChosen: 0
   produceTimeMax: 4
@@ -598,7 +602,7 @@ Transform:
   m_GameObject: {fileID: 5924548290459090665}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.66, y: 1.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6496587413167321551}
   m_RootOrder: 0
@@ -643,7 +647,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 536ef9a087e17704bb3049f7b942a7cb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da9e23612d58f3c48b4162ca1b3a640f, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

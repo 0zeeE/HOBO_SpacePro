@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
+using System.Xml;
+using UnityEditor;
+using TMPro;
 
 public class RocketMovement : MonoBehaviour
 {
@@ -24,8 +29,8 @@ public class RocketMovement : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     [SerializeField] private GameObject[] soundControl;
-    
 
+    [SerializeField] private TextMeshProUGUI myH;
     void Awake()
     {
 
@@ -34,7 +39,7 @@ public class RocketMovement : MonoBehaviour
         lvl1Rocket.GetComponent<AnimationController>();
         lvl2Rocket.GetComponent<AnimationController>();
 
-        Level1.enabled = true;
+        //Level1.enabled = true;
         maxHeight = 0;
         rigidbody = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
@@ -134,7 +139,9 @@ public class RocketMovement : MonoBehaviour
     {
         rocketLevel = rocketLvl;
         fuelLevel = fuelLvl;
+        Debug.Log("rocketMovement-> rocketLvl: " + rocketLevel + " fuelLvl: " + fuelLevel);
         SetRocketLevel();
+        SetFuelLevel();
     }
     public void SetRocketLevel()
     {
@@ -200,7 +207,9 @@ public class RocketMovement : MonoBehaviour
         if(transform.position.y * 5 > maxHeight)
         {
             maxHeight = transform.position.y * 5;
+
         }
+        myH.text = "Maksimum Yükseklik: " + (int)maxHeight + "\nYükseklik: " + (int)(transform.position.y * 5);
         //Debug.Log("Max Height: " + maxHeight);
     }
 
