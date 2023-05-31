@@ -218,12 +218,24 @@ public class DilSaveLoaddo : MonoBehaviour
         LoadInv();
         LoadBuildings();
         LoadShip();
-        
+
+
+        StartCoroutine(loadEkraniSil());
 
 
 
+    }
+    IEnumerator loadEkraniSil()
+    {
+        yield return new WaitForSeconds(2);
+        try
+        {
+            Destroy(GameObject.Find("loadSc"));
+        }
+        catch
+        {
 
-
+        }
     }
     void Update()
     {
