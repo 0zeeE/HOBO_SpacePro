@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2447189c9f9a5c4cb379ed5cfa79cd9, type: 3}
   m_Name: Celik
   m_EditorClassIdentifier: 
-  name: "\xC7elik"
+  name: Celik
   description: 
   artWork: {fileID: 0}
