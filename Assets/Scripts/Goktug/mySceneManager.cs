@@ -6,6 +6,9 @@ using TMPro;
 
 public class mySceneManager : MonoBehaviour
 {
+
+    [SerializeField] private GameObject MainMenu;
+    public static bool isGamePaused = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +31,46 @@ public class mySceneManager : MonoBehaviour
         yield return null;
 
     }
-    // Update is called once per frame
+    
+
+
+    public void ReturnMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isGamePaused)
+            {
+                OpenMenu();
+            }
+            else
+            {
+                CloseMenu();
+            }
+
+
+
+        }
     }
+
+    void OpenMenu()
+    {
+        MainMenu.SetActive(false);
+        isGamePaused = false;
+    }
+
+    void CloseMenu()
+    {
+        MainMenu.SetActive(true);
+        isGamePaused = true;
+    }
+
+    
+
+
+
+
 }

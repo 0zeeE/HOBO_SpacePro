@@ -239,6 +239,7 @@ public class DilSaveLoaddo : MonoBehaviour
     }
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.U))
         {
             saveGame();
@@ -247,5 +248,6 @@ public class DilSaveLoaddo : MonoBehaviour
         {
             LoadGame();
         }
+        */
     }
 }
