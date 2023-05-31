@@ -54,6 +54,8 @@ public class Building : MonoBehaviour
         {
             myLvlIsFull = false;
         }
+
+        setMyLvl(myLvl);
     }
     public void uretHerSeyi()
     {

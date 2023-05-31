@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using System.Xml;
+using UnityEditor;
 
 public class DilSaveLoaddo : MonoBehaviour
 {
@@ -22,34 +23,8 @@ public class DilSaveLoaddo : MonoBehaviour
 
 
     }
-    public void saveGame()
+    public void saveInv()
     {
-        if (File.Exists(filePathh))
-        {
-
-            try
-            {
-                File.Delete(filePathh);
-                Debug.Log("File deleted successfully.");
-                //saveGame();
-            }
-            catch (IOException e)
-            {
-                Debug.Log("An error occurred while deleting the file: " + e.Message);
-            }
-            
-        }
-        else
-        {
-            // Create a new file and write text
-            //File.WriteAllText(filePathh, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-
-            Debug.Log("Text file created at: " + filePathh);
-        }
-
-        File.WriteAllText(filePathh, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        File.AppendAllText(filePathh, "<All>");
-
         Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
         File.AppendAllText(filePathh, "<inv>");
         foreach (Inventory depo in Depomuz)
@@ -76,10 +51,12 @@ public class DilSaveLoaddo : MonoBehaviour
                 }
                 File.AppendAllText(filePathh, "</depo>");
             }
-            
+
         }
         File.AppendAllText(filePathh, "</inv>");
-
+    }
+    public void saveBuildings()
+    {
         Building[] builds = GameObject.FindObjectsOfType<Building>();
         File.AppendAllText(filePathh, "<tiles>");
         foreach (Building bui in builds)
@@ -94,7 +71,9 @@ public class DilSaveLoaddo : MonoBehaviour
             }
         }
         File.AppendAllText(filePathh, "</tiles>");
-
+    }
+    public void saveShip()
+    {
         ShipParts[] shipParts = GameObject.FindObjectsOfType<ShipParts>();
         File.AppendAllText(filePathh, "<rootShip>");
         foreach (ShipParts shipPart in shipParts)
@@ -103,15 +82,85 @@ public class DilSaveLoaddo : MonoBehaviour
             {
                 File.AppendAllText(filePathh, "<ship>");
                 File.AppendAllText(filePathh, ("<ship_part>" + shipPart.gameObject.name + "</ship_part>"));
-                File.AppendAllText(filePathh, ("<ship_partLvl>" + shipPart.myLvl+ "</ship_part>"));
+                File.AppendAllText(filePathh, ("<ship_partLvl>" + shipPart.myLvl + "</ship_partLvl>"));
                 File.AppendAllText(filePathh, "</ship>");
             }
         }
         File.AppendAllText(filePathh, "</rootShip>");
+    }
+    public void saveGame()
+    {
+        if (File.Exists(filePathh))
+        {
+
+            try
+            {
+                File.Delete(filePathh);
+                Debug.Log("File overwrited successfully.");
+                //saveGame();
+            }
+            catch (IOException e)
+            {
+                Debug.Log("An error occurred while overwriting the file: " + e.Message);
+            }
+            
+        }
+        else
+        {
+            // Create a new file and write text
+            //File.WriteAllText(filePathh, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
+            Debug.Log("Text file created at: " + filePathh);
+        }
+
+        File.WriteAllText(filePathh, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        File.AppendAllText(filePathh, "<All>");
+
+
+
+        saveInv();
+        saveBuildings();
+        saveShip();
+
 
         File.AppendAllText(filePathh, "</All>");
     }
-    public void LoadGame()
+
+
+    
+    private myMaterialHolder findMyMaterialHolder(string nameOfObj)
+    {
+        myMaterial MyMaterial = (myMaterial)AssetDatabase.LoadAssetAtPath(("Assets/Prefabs/Scriptables/"+ nameOfObj+ ".asset"), typeof(myMaterial));
+
+        myMaterialHolder newMatHolder = new myMaterialHolder(MyMaterial, 1);
+        return newMatHolder;
+    }
+    private void LoadShip()
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(filePathh);
+
+        ShipParts[] ships = GameObject.FindObjectsOfType<ShipParts>();
+        XmlNodeList shipNodes = xmlDoc.SelectNodes("//ship_part");
+        foreach (ShipParts shi in ships)
+        {
+            if (shi != null)
+            {
+                foreach (XmlNode shipNode in shipNodes)
+                {
+                    if (shipNode.InnerText == shi.gameObject.name)
+                    {
+                        XmlNode parentNode = shipNode.ParentNode;
+                        int Lvll = Int32.Parse(parentNode.SelectSingleNode("ship_partLvl").InnerText);
+                        Console.WriteLine("ship: " + shipNode.InnerText);
+                        Console.WriteLine("Level: " + Lvll);
+                        shi.loadMe(Lvll);
+                    }
+                }
+            }
+        }
+    }
+    private void LoadBuildings()
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePathh);
@@ -136,22 +185,45 @@ public class DilSaveLoaddo : MonoBehaviour
                 }
             }
         }
-        /*
-        foreach (XmlNode buildingNode in buildingNodes)
+    }
+    private void LoadInv()
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(filePathh);
+
+        Inventory[] invs = GameObject.FindObjectsOfType<Inventory>();
+        XmlNodeList invNodes = xmlDoc.SelectNodes("//matName");
+
+        foreach (XmlNode invNode in invNodes)
         {
-            Student student = new Student();
+            /*
+            Debug.LogWarning(invNode.InnerText);//Bor
+            Debug.LogError(invNode.ParentNode.InnerText);//Bor16
+            Debug.Log(invNode.ParentNode.SelectSingleNode("matName").InnerText);//Bor
+            */
 
-            XmlNode nameNode = studentNode.SelectSingleNode("name");
-            student.Name = nameNode.InnerText;
+            string namee = invNode.ParentNode.SelectSingleNode("matName").InnerText;
+            int adet = Int32.Parse(invNode.ParentNode.SelectSingleNode("amountt").InnerText);
+            //Debug.Log("namee: " + namee);
+            //Debug.Log("adet: " + adet);
 
-            XmlNode numberNode = studentNode.SelectSingleNode("number");
-            student.Number = numberNode.InnerText;
-
-            Console.WriteLine("Name: " + student.Name);
-            Console.WriteLine("Number: " + student.Number);
-            Console.WriteLine();
+            invs[0].depoyaEkle(findMyMaterialHolder(namee), adet);
         }
-        */
+
+    }
+    public void LoadGame()
+    {
+
+
+        LoadInv();
+        LoadBuildings();
+        LoadShip();
+        
+
+
+
+
+
     }
     void Update()
     {

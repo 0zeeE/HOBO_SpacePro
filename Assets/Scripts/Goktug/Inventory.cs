@@ -56,12 +56,13 @@ public class Inventory : MonoBehaviour
                 if (sahip.amountt >= myMaterialHolderrr.amountt)
                 {
                     sahip.amountt -= myMaterialHolderrr.amountt;
+                    depoYaziGuncelle();
                     return;
                 }
             }
 
         }
-
+        depoYaziGuncelle();
     }
     public void depoyaEkle(myMaterialHolder myMaterialHolderrr)
     {

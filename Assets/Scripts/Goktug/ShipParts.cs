@@ -86,7 +86,11 @@ public class ShipParts : MonoBehaviour
 
     }
 
-
+    public void loadMe(int lvl)
+    {
+        myLvl = lvl;
+        setMyLvl(myLvl);
+    }
     public void lvlUp()
     {
         if (myLvlmax > myLvl)
