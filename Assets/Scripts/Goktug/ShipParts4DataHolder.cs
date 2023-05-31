@@ -27,6 +27,9 @@ public class ShipParts4DataHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        //Debug.Log("rocketLevel: " + rocketLevel);
+        //Debug.Log("boosterLevel: " + boosterLevel);
+        //Debug.Log("fuelLevel: " + fuelLevel);
     }
 }

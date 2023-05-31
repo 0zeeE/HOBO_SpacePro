@@ -29,18 +29,24 @@ public class DataHolder : MonoBehaviour
             yield return null;
            
         }
-
-        Booster.GetComponent<StartBoost>().SetBoosterLvl(boosterLevel);
-        Booster.GetComponent<StartBoost>().boosterLevel = boosterLevel;
-        Booster.GetComponent<StartBoost>().SetBoosterLevel();
-
+        yield return new WaitForSeconds(1.5f);
 
         Rocket.GetComponent<RocketMovement>().setMyLvls(rocketLevel, fuelLevel);
-        Rocket.GetComponent<RocketMovement>().rocketLevel = rocketLevel;
-        Rocket.GetComponent<RocketMovement>().SetRocketLevel();
-        Rocket.GetComponent<RocketMovement>().fuelLevel = fuelLevel;
-        Rocket.GetComponent<RocketMovement>().SetFuelLevel();
 
+
+        
+        Booster.GetComponent<StartBoost>().SetBoosterLvl(boosterLevel);
+
+
+        try
+        {
+            Destroy(GameObject.Find("loadSc"));
+        }
+        catch
+        {
+            
+        }
+        
 
     }
     public void burasi()
@@ -49,18 +55,17 @@ public class DataHolder : MonoBehaviour
     }
     IEnumerator topladiðimiAktar()
     {
-        Debug.Log("topladiðimiAktar()");
 
-        
-
-        Debug.Log("bura");
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
         Inventory[] Depomuz = GameObject.FindObjectsOfType<Inventory>();
-        Debug.Log("buraa");
 
         Depomuz[0].depoyaEkle(para, earnedMoney);
-        
+        Building[] builds = GameObject.FindObjectsOfType<Building>();
+        foreach(Building bui in builds)
+        {
+            bui.loadMe();
+        }
         Destroy(this.gameObject);
     }
     void Start()
@@ -97,8 +102,10 @@ public class DataHolder : MonoBehaviour
 
 
         
+        adamOl();
 
         statGuncelle();
+
     }
 
     private void FixedUpdate()
@@ -118,6 +125,8 @@ public class DataHolder : MonoBehaviour
         }
         catch
         {
+            Debug.Log("patates burasý");
+
             return;
         }
     }

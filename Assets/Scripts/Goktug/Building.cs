@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
+using System.Xml;
+using UnityEditor;
 
 [System.Serializable]
 public class Building : MonoBehaviour
@@ -31,6 +35,7 @@ public class Building : MonoBehaviour
     [SerializeField] public float produceTimeMax;
     [SerializeField] private float produceTime;
 
+
     public void setMyLvl(int nowMyLvl)
     {
         foreach(GameObject a in eachLvl)
@@ -38,6 +43,30 @@ public class Building : MonoBehaviour
             a.SetActive(false);
         }
         eachLvl[nowMyLvl].SetActive(true);
+    }
+    public void loadMe()
+    {
+        string dataPath = Application.dataPath;
+        string filePath = Path.Combine(dataPath, "save01.xml");
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(filePath);
+
+
+        XmlNodeList buildingNodes = xmlDoc.SelectNodes("//building_name");
+        Building bui = this.gameObject.GetComponent<Building>();
+        foreach (XmlNode buildingNode in buildingNodes)
+        {
+            if (buildingNode.InnerText == bui.gameObject.name)
+            {
+                XmlNode parentNode = buildingNode.ParentNode;
+                int expp = Int32.Parse(parentNode.SelectSingleNode("building_exp").InnerText);
+                int Lvll = Int32.Parse(parentNode.SelectSingleNode("building_lvl").InnerText);
+
+                bui.loadMe(Lvll, expp);
+                return;
+            }
+        }
+
     }
     public void loadMe(int lvl,int exp)
     {
