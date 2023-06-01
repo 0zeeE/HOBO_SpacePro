@@ -6,6 +6,8 @@ using System;
 using System.Xml;
 using UnityEditor;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class RocketMovement : MonoBehaviour
 {
@@ -56,6 +58,11 @@ public class RocketMovement : MonoBehaviour
 
         move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         //Debug.Log("Yakit miktari: " + fuelAmount);
+
+        if(maxHeight >= 40000)
+        {
+            Ending();
+        }
     }
 
     private void FixedUpdate()
@@ -217,4 +224,11 @@ public class RocketMovement : MonoBehaviour
     {
         return fuelAmount;
     }
+
+    public void Ending()
+    {
+        SceneManager.LoadScene("Ending");
+    }
+
+    
 }
