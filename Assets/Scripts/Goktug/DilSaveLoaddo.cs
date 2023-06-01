@@ -130,7 +130,7 @@ public class DilSaveLoaddo : MonoBehaviour
     
     private myMaterialHolder findMyMaterialHolder(string nameOfObj)
     {
-        myMaterial MyMaterial = (myMaterial)AssetDatabase.LoadAssetAtPath(("Assets/Prefabs/Scriptables/"+ nameOfObj+ ".asset"), typeof(myMaterial));
+        myMaterial MyMaterial = (myMaterial)Resources.Load<myMaterial>("Assets/Prefabs/Scriptables/" + nameOfObj + ".asset");
 
         myMaterialHolder newMatHolder = new myMaterialHolder(MyMaterial, 1);
         return newMatHolder;
