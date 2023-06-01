@@ -5,9 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    //Ana menu
     [SerializeField] private GameObject MainMenuCanvas;
     [SerializeField] private GameObject CreditsCanvas;
     private bool isFullyLoaded = false;
+
+    //Ogretici Kanvaslari
+    [SerializeField] private GameObject Tutorial1;
+    [SerializeField] private GameObject Tutorial2;
+    [SerializeField] private GameObject Tutorial3;
+    [SerializeField] private GameObject Tutorial4;
+
+
 
     private void Start()
     {
@@ -43,7 +52,55 @@ public class MainMenuManager : MonoBehaviour
         MainMenuCanvas.SetActive(true);
         CreditsCanvas.SetActive(false);
     }
-    
+
+    public void TutorialMenu()
+    {
+        MainMenuCanvas.SetActive(false);
+        Tutorial1.SetActive(true);
+    }
+
+    public void Tutorial1To2()
+    {
+        Tutorial1.SetActive(false);
+        Tutorial2.SetActive(true);
+    }
+
+    public void Tutorial2To3()
+    {
+        Tutorial2.SetActive(false);
+        Tutorial3.SetActive(true);
+    }
+
+    public void Tutorial3To4()
+    {
+        Tutorial3.SetActive(false);
+        Tutorial4.SetActive(true);
+    }
+
+    public void CloseTutorial()
+    {
+        if(Tutorial1.activeInHierarchy == true)
+        {
+            Tutorial1.SetActive(false);
+        }
+        if (Tutorial2.activeInHierarchy == true)
+        {
+            Tutorial2.SetActive(false);
+        }
+        if (Tutorial3.activeInHierarchy == true)
+        {
+            Tutorial3.SetActive(false);
+        }
+        if (Tutorial4.activeInHierarchy == true)
+        {
+            Tutorial4.SetActive(false);
+        }
+        MainMenuCanvas.SetActive(true);
+
+
+    }
+
+
     IEnumerator LoadScreen()
     {
         isFullyLoaded = false;
